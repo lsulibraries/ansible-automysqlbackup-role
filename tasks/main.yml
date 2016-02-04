@@ -1,19 +1,30 @@
 ---
 
-- include: debian.yml
-  when: ansible_os_family == 'Debian' or ansible_distribution == 'Ubuntu'
+- name: Get automysqlbackup
+  unarchive:
+    copy: no
+    src: "http://downloads.sourceforge.net/project/automysqlbackup/AutoMySQLBackup/AutoMySQLBackup%20VER%203.0/automysqlbackup-v3.0_rc6.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fautomysqlbackup%2F&ts=1454612617&use_mirror=iweb"
+    dest: /opt/
 
-- include: redhat.yml
-  when: ansible_os_family == 'RedHat' or ansible_distribution == 'CentOS'
+- name: Create the /etc/automysqlbackup directory.
+  file: 
+    path: /etc/automysqlbackup
+    state: directory
 
-- include: default.yml
-  when: automysqlbackup_loaded_os_family|default(False) == False
+- name: Copy in the automysqlbackup.conf file.
+  command: cp /opt/automysqlbackup.conf /etc/automysqlbackup/automysqlbackup.conf
+
+- name: Copy the automysqlbackup file to /usr/local/bin and make executable.
+  file: 
+    path: /opt/automysqlbackup
+    dest: /usr/local/bin/automysqlbackup
+    mode: 0750
 
 - name: apply automysqlbackup configuration
   sudo: yes
   template:
-    src: automysqlbackup.j2
-    dest: /etc/default/automysqlbackup
+    src: automysqlbackup.conf.j2
+    dest: /etc/automysqlbackup/myserver.conf
     group: root
     owner: root
     mode: 0600
