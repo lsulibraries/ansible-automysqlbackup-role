@@ -1,5 +1,4 @@
 ---
-
 - name: Get automysqlbackup
   unarchive:
     copy: no
@@ -15,10 +14,7 @@
   command: cp /opt/automysqlbackup.conf /etc/automysqlbackup/automysqlbackup.conf
 
 - name: Copy the automysqlbackup file to /usr/local/bin and make executable.
-  file: 
-    path: /opt/automysqlbackup
-    dest: /usr/local/bin/automysqlbackup
-    mode: 0750
+  command: cp /opt/automysqlbackup /usr/local/bin/automysqlbackup && chmod 0750 /usr/local/bin/automysqlbackup
 
 - name: apply automysqlbackup configuration
   sudo: yes
