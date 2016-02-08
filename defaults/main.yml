@@ -8,7 +8,7 @@ automysqlbackup_password: "$(grep password /etc/mysql/debian.cnf | tail -n 1 | c
 automysqlbackup_host: localhost
 
 # space separated string of databases to include or ignore in the backup
-automysqlbackup_dbames: "all"
+automysqlbackup_dbames: 
 automysqlbackup_dbexclude: ""
 
 # whether to include a create database statement

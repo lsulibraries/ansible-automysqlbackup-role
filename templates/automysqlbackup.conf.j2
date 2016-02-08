@@ -78,7 +78,7 @@ CONFIG_db_exclude=( "{{ automysqlbackup_dbexclude }}" )
 # If the chosen day is greater than the last day of the month, it will be done
 # on the last day of the month.
 # Set to 0 to disable monthly backups.
-#CONFIG_do_monthly="01"
+CONFIG_do_monthly="01"
 
 # Which day do you want weekly backups? (1 to 7 where 1 is Monday)
 # Set to 0 to disable weekly backups.
@@ -86,13 +86,13 @@ CONFIG_do_weekly={{ automysqlbackup_doweekly }}
 
 # Set rotation of daily backups. VALUE*24hours
 # If you want to keep only today's backups, you could choose 1, i.e. everything older than 24hours will be removed.
-#CONFIG_rotation_daily=6
+CONFIG_rotation_daily=6
 
 # Set rotation for weekly backups. VALUE*24hours
-#CONFIG_rotation_weekly=35
+CONFIG_rotation_weekly=35
 
 # Set rotation for monthly backups. VALUE*24hours
-#CONFIG_rotation_monthly=150
+CONFIG_rotation_monthly=150
 
 
 # Server Connection Settings
@@ -183,12 +183,12 @@ CONFIG_mysql_dump_use_separate_dirs={{ automysqlbackup_sepdir }}
 
 # Store an additional copy of the latest backup to a standard
 # location so it can be downloaded by third party scripts.
-#CONFIG_mysql_dump_latest='no'
+CONFIG_mysql_dump_latest='yes'
 
 # Remove all date and time information from the filenames in the latest folder.
 # Runs, if activated, once after the backups are completed. Practically it just finds all files in the latest folder
 # and removes the date and time information from the filenames (if present).
-#CONFIG_mysql_dump_latest_clean_filenames='no'
+CONFIG_mysql_dump_latest_clean_filenames='yes'
 
 # Create differential backups. Master backups are created weekly at #$CONFIG_do_weekly weekday. Between master backups,
 # diff is used to create differential backups relative to the latest master backup. In the Manifest file, you find the

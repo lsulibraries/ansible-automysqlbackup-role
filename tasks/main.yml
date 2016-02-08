@@ -14,7 +14,11 @@
   command: cp /opt/automysqlbackup.conf /etc/automysqlbackup/automysqlbackup.conf
 
 - name: Copy the automysqlbackup file to /usr/local/bin and make executable.
-  command: cp /opt/automysqlbackup /usr/local/bin/automysqlbackup && chmod 0750 /usr/local/bin/automysqlbackup
+  copy:
+    src: /opt/automysqlbackup
+    dest: /usr/local/bin/
+    remote_src: yes
+    mode: 0750
 
 - name: apply automysqlbackup configuration
   sudo: yes
@@ -43,6 +47,6 @@
     month: "{{ automysqlbackup_cron.month }}"
     weekday: "{{ automysqlbackup_cron.weekday }}"
     user: root
-    job: "/usr/sbin/automysqlbackup"
+    job: "/usr/local/bin/automysqlbackup /etc/automysqlbackup/myserver.conf"
   tags:
     - automysqlbackup
