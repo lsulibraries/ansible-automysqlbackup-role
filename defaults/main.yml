@@ -35,3 +35,4 @@ automysqlbackup_cron:
   weekday: "*"
 
 automysqlbackup_dump_full_schema: yes
+automysqlbackup_mysql_dump_usessl: no
